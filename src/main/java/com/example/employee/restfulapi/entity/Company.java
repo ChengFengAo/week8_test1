@@ -8,10 +8,11 @@ import java.util.Set;
 @Entity
 public class Company {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String companyName;
     private Integer employeesNumber;
+    private Set<Employee> employeeSet= new HashSet<>();
 
     public Company() {
     }
@@ -19,6 +20,15 @@ public class Company {
     public Company(String companyName, Integer employeesNumber) {
         this.companyName = companyName;
         this.employeesNumber = employeesNumber;
+    }
+
+    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER,mappedBy = "Employee")
+    public Set<Employee> getEmployeeSet() {
+        return employeeSet;
+    }
+
+    public void setEmployeeSet(Set<Employee> employeeSet) {
+        this.employeeSet = employeeSet;
     }
 
     public Long getId() {
