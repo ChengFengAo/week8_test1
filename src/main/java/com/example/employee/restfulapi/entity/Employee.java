@@ -7,12 +7,13 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Employee {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String name;
     private Integer age;
     private String gender;
     private Integer salary;
+
     private Long companyId;
 
     public Employee() {
@@ -25,9 +26,8 @@ public class Employee {
         this.salary = salary;
         this.companyId = companyId;
     }
-
-    @JoinColumn(name = "COMPANY_ID")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="Company_Id")
+    @ManyToOne(fetch=FetchType.LAZY)
     public Long getCompanyId() {
         return companyId;
     }
@@ -44,7 +44,7 @@ public class Employee {
         this.salary = salary;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
