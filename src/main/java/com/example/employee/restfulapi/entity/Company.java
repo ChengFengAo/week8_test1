@@ -12,7 +12,9 @@ public class Company {
     private Long id;
     private String companyName;
     private Integer employeesNumber;
-    private Set<Employee> employeeSet= new HashSet<>();
+
+    @OneToMany(fetch=FetchType.EAGER,cascade={CascadeType.REMOVE,CascadeType.MERGE,CascadeType.REFRESH},mappedBy="companyId")
+    private Set<Employee> employees=new HashSet<>();
 
     public Company() {
     }
@@ -22,13 +24,12 @@ public class Company {
         this.employeesNumber = employeesNumber;
     }
 
-    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER,mappedBy = "Employee")
-    public Set<Employee> getEmployeeSet() {
-        return employeeSet;
+    public Set<Employee> getEmployees() {
+        return employees;
     }
 
-    public void setEmployeeSet(Set<Employee> employeeSet) {
-        this.employeeSet = employeeSet;
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
     }
 
     public Long getId() {
