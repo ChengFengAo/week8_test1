@@ -26,6 +26,8 @@ public class Employee {
         this.companyId = companyId;
     }
 
+    @JoinColumn(name = "COMPANY_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
     public Long getCompanyId() {
         return companyId;
     }
